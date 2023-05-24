@@ -9,10 +9,10 @@ type Leadboard struct {
 
 func (conn *MySQLDB) RetrieveLeaderboard() ([]Leadboard, error) {
 	query := `
-		SELECT u.nick, u.image, l.order, l.points
+		SELECT u.nick, u.image, l.order_pos, l.point
 		FROM leadboard l
 		INNER JOIN user u ON l.user_id = u.id
-		ORDER BY l.order ASC
+		ORDER BY l.order_pos ASC
 	`
 
 	rows, err := conn.db.Query(query)
