@@ -2,7 +2,6 @@ package method
 
 import (
 	"fmt"
-	"math/rand"
 	"time"
 
 	"github.com/dariociaudano/coffee_arena_server/database"
@@ -45,7 +44,7 @@ func GetQuestionsAnswers(c *gin.Context, dbState DBState) {
 
 func GetQuestions(c *gin.Context, dbState DBState) ([]Question, error) {
 	// Generate a random number of questions to retrieve
-	numQuestions := rand.Intn(10) + 1 // Random number between 1 and 10
+	//	numQuestions := rand.Intn(10) + 1 // Random number between 1 and 10
 
 	// Check user inside DB
 	conn, err := database.NewMySQLDB(dbState.Username, dbState.Password, dbState.Host, dbState.Port, dbState.DatabaseName)
@@ -54,7 +53,7 @@ func GetQuestions(c *gin.Context, dbState DBState) ([]Question, error) {
 	}
 
 	// Query the database to retrieve random questions
-	qdb, err := conn.QueryQuestionsDB(numQuestions)
+	qdb, err := conn.QueryQuestionsDB(10)
 	if err != nil {
 		return nil, err
 	}
